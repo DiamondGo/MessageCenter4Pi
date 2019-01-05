@@ -1,0 +1,30 @@
+syntax = "proto3";                                                                                                                                                    
+
+package botservice;
+
+service SendMessage {
+    rpc SendMessage(Request) returns (Response) {}
+}
+
+message Request {
+    ChatId chatId = 1;
+    Text text = 2;
+    enum ParseMode {
+      PlainText = 0;
+      Markdown = 1;
+      HTML = 2;
+    }
+    ParseMode parseMode = 3;
+}
+
+message ChatId {
+    int32 id = 1;
+}
+
+message Text {
+    string text = 1;
+}
+
+message Response {
+    bool success = 1;
+}
