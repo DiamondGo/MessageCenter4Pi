@@ -1,10 +1,3 @@
-# uncompyle6 version 3.2.5
-# Python bytecode 3.6 (3379)
-# Decompiled from: Python 3.6.8 (default, Dec 28 2018, 19:14:55) 
-# [GCC 6.3.0 20170516]
-# Embedded file name: /home/pi/source/telebot/send_client.py
-# Compiled at: 2019-01-05 00:33:07
-# Size of source mod 2**32: 1701 bytes
 import os.path, threading, configparser, grpc
 from pathlib import Path
 import send_message_pb2, send_message_pb2_grpc, logging
