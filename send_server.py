@@ -1,5 +1,6 @@
 import os.path
-import telepot
+#import telepot
+import telegram
 import time
 from pathlib import Path
 import grpc
@@ -22,7 +23,8 @@ log.addHandler(logHandler)
 class SendMessageService(send_message_pb2_grpc.SendMessageServicer):
     def __init__(self):
         self.config = self.get_config()
-        self.bot = telepot.Bot("%s:%s" % (self.config['account'], self.config['secret']))
+        #self.bot = telepot.Bot("%s:%s" % (self.config['account'], self.config['secret']))
+        self.bot = telegram.Bot("%s:%s" % (self.config['account'], self.config['secret']))
 
     def get_config(self):
         home = str(Path.home())
@@ -51,7 +53,8 @@ class SendMessageService(send_message_pb2_grpc.SendMessageServicer):
                     send_message_pb2.Request.Markdown: "markdown",
                     send_message_pb2.Request.HTML: "html"
                     }[parse_mode]
-            sent = self.bot.sendMessage(chat_id=chat_id, text=text, parse_mode=parseMode)
+            #sent = self.bot.sendMessage(chat_id=chat_id, text=text, parse_mode=parseMode)
+            sent = self.bot.send_message(chat_id=chat_id, text=text, parse_mode=parseMode)
             return send_message_pb2.Response(success=(sent is not None))
         except:
             return send_message_pb2.Response(success=False)
